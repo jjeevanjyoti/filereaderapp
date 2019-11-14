@@ -2,4 +2,20 @@
   <input type="file" (change)="onFileSelect($event.target)" name="myfile">
 </div>
 
-<app-filereader></app-filereader>
+
+
+<section>
+
+
+  <table class="table">
+    <thead>
+      <tr *ngFor="let header of headerNames">
+        <th>{{header}}</th>
+      </tr>
+    </thead>
+    <tbody>
+    
+    </tbody>
+  </table>
+</section>
+

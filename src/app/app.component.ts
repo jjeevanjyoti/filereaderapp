@@ -9,9 +9,11 @@ import { Papa } from 'ngx-papaparse';
 export class AppComponent implements OnInit  {
   title = 'filereader';
   csvContent: string;
-  colData:any=[];
   headerNames:any;
-  constructor(private papa : Papa){}
+  colData:any;
+  constructor(private papa : Papa){
+    this.headerNames=[];
+  }
   ngOnInit(){
   }
 
@@ -20,15 +22,16 @@ export class AppComponent implements OnInit  {
     this.csvContent = textFromFileLoaded;   
     var data = this.csvContent.split("\n")
     this.headerNames=data[0];
+    var tempData = [];
    for(let i=1;i<data.length;i++){
       var csvArr= data[i].split(",");
       console.log(typeof(csvArr))
-      this.colData.push(data[i]);
-      
+      tempData.push( csvArr ); 
    }
-
+   this.colData= tempData
+   this.headerNames=this.headerNames.split(",")
+   console.log(this.colData);
    console.log(this.headerNames);
-  //  console.log(this.colData);
 
   
 }
