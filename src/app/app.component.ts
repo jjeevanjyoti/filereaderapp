@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Papa } from 'ngx-papaparse';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +9,27 @@ import { Component, OnInit } from '@angular/core';
 export class AppComponent implements OnInit  {
   title = 'filereader';
   csvContent: string;
-
-  constructor(){}
+  colData:any=[];
+  headerNames:any;
+  constructor(private papa : Papa){}
   ngOnInit(){
   }
+
   onFileLoad(fileLoadedEvent) {
     const textFromFileLoaded = fileLoadedEvent.target.result;              
     this.csvContent = textFromFileLoaded;   
-    console.log(this.csvContent)  
-     console.log(typeof(this.csvContent));
- 
+    var data = this.csvContent.split("\n")
+    this.headerNames=data[0];
+   for(let i=1;i<data.length;i++){
+      var csvArr= data[i].split(",");
+      console.log(typeof(csvArr))
+      this.colData.push(data[i]);
+      
+   }
+
+   console.log(this.headerNames);
+  //  console.log(this.colData);
+
   
 }
 
